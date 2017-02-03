@@ -3,3 +3,6 @@
 # version: 0.1
 # authors: R. Zander
 # url: https://github.com/r-zander/discourse-dsa-bbcode
+
+
+register_asset "stylesheets/dsa-bbcodes.scss"
