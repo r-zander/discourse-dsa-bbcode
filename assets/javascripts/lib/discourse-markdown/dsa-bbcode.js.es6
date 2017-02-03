@@ -13,10 +13,13 @@ export function setup(helper) {
 
   helper.whiteList({
     custom(tag, name, value) {
-      if (tag === 'div' && name === 'class') {
-        return value === 'bbcode-dsa-regel' || value === 'bbcode-dsa-regelwert' ||
-               value.startsWith('bbcode-dsa-regel ') || value.startsWith('bbcode-dsa-regelwert ');
+      if (tag === 'dl' && name === 'class') {
+      // if (tag === 'div' && name === 'class') {
+        return value === 'bbcode-dsa-regel' || value.startsWith('bbcode-dsa-regel ');
       }
+      // if ((tag === 'dt' || tag === 'dd') && name === 'class') {
+      //   return value === 'bbcode-dsa-regelwert' || value.startsWith('bbcode-dsa-regelwert ');
+      // }
     }
   });
 
@@ -36,11 +39,41 @@ export function setup(helper) {
       className += ' ';
       className += generateCssClass(param);
     }
-    return [
+    return [ "",
              ['dt', {'class': className, 'data-bbcode': true}, param],
              ['dd', {'class': className, 'data-bbcode': true}].concat(contents)
            ];
-    });
+  });
+
+  // register("regel", (contents, param) => {
+  //   let jsonml = ['dl', {'class': 'bbcode-dsa-regel' + (param ? ' ' + generateCssClass(param) : ''), 'data-bbcode': true}];
+
+
+
+
+  //   if (blockContents.length) {
+  //     blockContents.forEach(bc => {
+  //       const lines = bc.split(/\n/);
+  //       lines.forEach(line => {
+
+
+  //         if (line.indexOf("[*]") === 0) {
+  //           const li = this.processInline(line.slice(3));
+  //           if (li) {
+  //             contents.push(["li"].concat(li));
+  //           }
+  //         }
+  //       });
+  //     });
+  //   }
+
+
+
+  //   return [
+  //            ['dt', {'class': className, 'data-bbcode': true}, param],
+  //            ['dd', {'class': className, 'data-bbcode': true}].concat(contents)
+  //          ];
+  //   });
 
 
 }
