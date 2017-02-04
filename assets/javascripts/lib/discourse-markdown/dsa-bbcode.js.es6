@@ -13,8 +13,8 @@ export function setup(helper) {
 
   helper.whiteList({
     custom(tag, name, value) {
-      if (tag === 'dl' && name === 'class') {
-      // if (tag === 'div' && name === 'class') {
+      // if (tag === 'dl' && name === 'class') {
+      if (tag === 'div' && name === 'class') {
         return value === 'bbcode-dsa-regel' || value.startsWith('bbcode-dsa-regel ');
       }
       // if ((tag === 'dt' || tag === 'dd') && name === 'class') {
@@ -32,18 +32,21 @@ export function setup(helper) {
    *   ...
    * </dl>
    */
-  register("regel", (contents, param) => ['dl', {'class': 'bbcode-dsa-regel' + (param ? ' ' + generateCssClass(param) : ''), 'data-bbcode': true}].concat(contents));
-  register("wert", (contents, param) => {
+  register("wert", {noWrap: true}, (contents, param) => {
     let className = 'bbcode-dsa-regelwert';
     if (param) {
       className += ' ';
       className += generateCssClass(param);
     }
-    return [ "",
-             ['dt', {'class': className, 'data-bbcode': true}, param],
+    return [ 'dt', {'class': className, 'data-bbcode': true}, param,
              ['dd', {'class': className, 'data-bbcode': true}].concat(contents)
            ];
   });
+  register("regel", (contents, param) => ['div', {
+    'class': 'bbcode-dsa-regel' + (param ? ' ' + generateCssClass(param) : ''),
+    'data-bbcode': true},
+    ['dt', {'class': 'bbcode-rule'}, param],
+    ['dd', {'class': 'bbcode-rule'}, "???"]].concat(contents));
 
   // register("regel", (contents, param) => {
   //   let jsonml = ['dl', {'class': 'bbcode-dsa-regel' + (param ? ' ' + generateCssClass(param) : ''), 'data-bbcode': true}];
