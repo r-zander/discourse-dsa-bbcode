@@ -32,21 +32,26 @@ export function setup(helper) {
    *   ...
    * </dl>
    */
-  register("wert", {noWrap: true}, (contents, param) => {
-    let className = 'bbcode-dsa-regelwert';
-    if (param) {
-      className += ' ';
-      className += generateCssClass(param);
-    }
-    return [ 'dt', {'class': className, 'data-bbcode': true}, param,
-             ['dd', {'class': className, 'data-bbcode': true}].concat(contents)
-           ];
-  });
+  // register("wert", {noWrap: true}, (contents, param) => {
+  //   let className = 'bbcode-dsa-regelwert';
+  //   if (param) {
+  //     className += ' ';
+  //     className += generateCssClass(param);
+  //   }
+  //   return [ 'dt', {'class': className, 'data-bbcode': true}, param,
+  //            ['dd', {'class': className, 'data-bbcode': true}].concat(contents)
+  //          ];
+  // });
+  // register("regel", (contents, param) => ['div', {
+  //   'class': 'bbcode-dsa-regel' + (param ? ' ' + generateCssClass(param) : ''),
+  //   'data-bbcode': true},
+  //   ['dt', {'class': 'bbcode-rule'}, param],
+  //   ['dd', {'class': 'bbcode-rule'}, "???"]].concat(contents));
+
   register("regel", (contents, param) => ['div', {
     'class': 'bbcode-dsa-regel' + (param ? ' ' + generateCssClass(param) : ''),
-    'data-bbcode': true},
-    ['dt', {'class': 'bbcode-rule'}, param],
-    ['dd', {'class': 'bbcode-rule'}, "???"]].concat(contents));
+    'data-bbcode': true
+  }].concat(contents));
 
   // register("regel", (contents, param) => {
   //   let jsonml = ['dl', {'class': 'bbcode-dsa-regel' + (param ? ' ' + generateCssClass(param) : ''), 'data-bbcode': true}];
